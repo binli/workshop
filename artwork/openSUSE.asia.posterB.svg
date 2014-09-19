@@ -15,7 +15,7 @@
    id="svg8113"
    sodipodi:version="0.32"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="FreePoster_asia.svg"
+   sodipodi:docname="openSUSE.asia.posterB.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    version="1.0"
    inkscape:export-filename="/home/binli/FreePoster_asia_v3.png"
@@ -3631,10 +3631,10 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.73812942"
-     inkscape:cx="370.18167"
-     inkscape:cy="483.77398"
-     inkscape:current-layer="layer2"
+     inkscape:zoom="1.0438726"
+     inkscape:cx="471.4078"
+     inkscape:cy="208.45389"
+     inkscape:current-layer="g8789"
      inkscape:window-width="1920"
      inkscape:window-height="1041"
      inkscape:window-x="0"
@@ -3651,7 +3651,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -3708,14 +3708,14 @@
         <text
            xml:space="preserve"
            style="font-size:16px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:FifthLeg;-inkscape-font-specification:FifthLeg Bold"
-           x="573.56549"
+           x="523.33069"
            y="573.43756"
            id="text9101"
            sodipodi:linespacing="125%"><tspan
              sodipodi:role="line"
              id="tspan9103"
-             x="573.56549"
-             y="573.43756">Linux for open minds</tspan></text>
+             x="523.33069"
+             y="573.43756">Bring you to the free world</tspan></text>
       </g>
       <g
          style="display:inline;filter:url(#filter14833-4)"
