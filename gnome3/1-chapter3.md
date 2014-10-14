@@ -1,226 +1,148 @@
 # 3 编程语言 #
 
-> 在 GNOME 3 以前，C 语言是创建 GNOME 应用程序的首选语言，之后出现了 C++，C#，Python 语言。
+> 在 GNOME 3 以前，C 语言是创建 GNOME 应用程序的首选语言，之后出现了 C++，C#，Python 语言。当 GNOME 发展到版本3时，Vala 和 JavaScript 变得越来越流行了，甚至已经成为了 GNOME 的重要部分。JavaScript 已经存在很久了，人们也都早就熟知了。Vala 虽然非常新，但是编程效率高效，借鉴了 Java 和 C# 中语法，在 GNOME 应用开发中也正在受到开发者们的关注。
 
-Long before GNOME 3, C was the first programming language for creating
-GNOME applications, and after it came C++, C#, Python, and the others.
-
-当 GNOME 开发的版本3，Vala 和 JavaScript 变得越来越流行了，甚至已经成为 GNOME 的重要部分。
-When GNOME was evolving close to Version 3, Vala and JavaScript became
-more and more popular and even became an important part of it. 
-
-JavaScript 已经存在很久了，人们也都熟知了。
-Vala 虽然非常新，但是编程效率高效，借鉴了 Java 和 C# 中语法，在 GNOME 应用开发中正在受到开发者们的关注。
-
-has been around for a long time and people are familiar with it. Vala is quite
-new, but because the program written with it is fast and has a familiar syntax
-adopted from Java and C#, it is gaining popularity among GNOME application
-developers.
-
-本章讲述两种编程语言。
-我们将快速了解 JavaScript 和 Vala 的基础，以确保我们有足够的知识来用这些语言开发应用程序。
-This chapter talks about these two programming languages. We will quickly look at the
-essentials of JavaScript and Vala, making sure that we have enough knowledge to make
-our applications with these languages.
+本章讲述两种编程语言。我们将快速了解 JavaScript 和 Vala 的基础，以确保我们有足够的知识来用这些语言开发应用程序。
 
 在本章我们将会学到：
-In this chapter we shall learn about:
-  Playing with data types in JavaScript
-  Controlling iteration in JavaScript
-  Basic object-oriented programming in JavaScript
-  Constructing JavaScript objects
-  Using JavaScript prototypes
-  Modularizing a JavaScript program
-  A Vala member access specifier
-  Basic data types in Vala
-  Gee collection library
-在 JavaScript 中操作数据类型
-在 JavaScript 如何控制迭代
-JavaScript 基本的面向对象编程
-构建 JavaScript 对象
-使用 JavaScript 原型
-模块化 JavaScript 程序
-Vala 成员访问说明符
-Vala 的基本数据类型
-Gee 收集库
 
-Let us start first with implementing JavaScript with Seed.a
-让我们用 Seed 来开始。
+- 在 JavaScript 中操作数据类型
+- 在 JavaScript 中控制迭代
+- JavaScript 基本的面向对象编程
+- 构建 JavaScript 对象
+- 使用 JavaScript 原型
+- 模块化 JavaScript 程序
+- Vala 成员访问标示符
+- Vala 的基本数据类型
+- Gee 集合库
 
-Programming GNOME with JavaScript
-用 JavaScript 来编写 GNOME 程序
+让我们从使用 Seed 来开始了解 JavaScript 。
+
+## 用 JavaScript 来编写 GNOME 程序
 
 目前有在 GNOME 中有两种 JavaScript 的实现，使用不同的引擎。
 一个是 Gjs，基于 Mozilla 的 Spidermonkey。
 一个是 Seed，基于 WebKit 的 JavaScript 核心引擎。
 目前 GNOME 3 官方使用 Gjs，我们也将尽量采用 Gjs 来演示，由于原书中采用 Seed 来举例，这里我们也会保留。
 
-There are actually two competing JavaScript implementations in GNOME, with differences in
-the engines used. The first one is Gjs, which is based on Spidermonkey, a JavaScript engine
-created by Mozilla. The second one, which we will use, is Seed. It is based on WebKit s
-JavaScript core engine. We chose Seed because it is used officially in GNOME 3.
+### 实践环节 - Gjs / Seed 初探
 
-动手时间，Gjs / Seed 初探
-Time for action – saying hello to Seed
+现在让我们看看 Gjs 或 Seed 是怎么工作的。
 
-Now it is time to see how Seed works.
-现在让我们看看 Gjs / Seed 是怎么工作的。
-1.	 Run the terminal from the Terminal menu in Activities in GNOME Shell or from
-Applications | Accessories | Terminal.
-1. 在 GNOME shell 中打开终端(gnome-terminal)
-2.	 Run Seed by typing seed within the terminal console.
-2. 运行 Gjs / Seed 
-$ gjs
-$ seed
-3.	We are entering the Seed prompt:
-之后会进入提示符，
-Gjs 的提示符
-gjs>
-Seed 的提示符
->
-4.	
-Type the following code, followed by the return key:
-输入下面的代码，回车
-print("Hello, world")
-5.	
-The text is printed out.
-将打出下面的文字
-Hello, world
-What just happened?
-发生了什么？
-Seed is an interpreter. When running Seed like this, we are entering the Seed interactive
-mode, which means that it interactively gives the result of the code that we typed. In this
-mode, we can type any valid JavaScript code in this shell. However, for those of you who
-are used to JavaScript programming, you can't type code like we do when coding for web
-applications. For example, you can't type the following code:
-console.log("Hello, world")
-This is because Seed does not provide objects such as document or console. So, only basic
-JavaScript is acceptable unless we can import the required objects.
-Gjs / Seed 是一个解释器。我们这这种方式运行会进入交互模式，意味着我们输入一段指令它就会给我们结果。
+1. 在 GNOME shell 中打开终端 (gnome-terminal)
+2. 运行 Gjs 或 Seed
+
+    $ gjs
+    
+    $ seed
+
+3. 之后会进入提示符，Gjs 的提示符：
+
+    gjs>
+
+    而 Seed 的提示符：
+    
+    \>
+    
+4. 输入下面的代码，回车.
+
+    print("Hello, world")
+    
+5. 将打出下面的结果。
+
+    Hello, world
+
+### 刚刚发生了什么？
+
+Gjs 和 Seed 是一个解释器。我们通过这种方式运行会进入交互模式，意味着我们每输入一段指令它就会立即返回给我们结果。
 我们可以输入任何 JavaScript 代码，然而你不能输入我们开发网页应用的代码。
 例如：
+````
 console.log("Hello, world")
+````
+这是因为 Gjs 和 Seed 并不提供 _document_ 或 _console_ 对象。因此只支持基本的 JavaScript ，除非我们导入相应的对象。
 
-这是因为 Gjs / Seed 并不提供 document 或 console 对象。因此只支持基本的 JavaScript ，除非我们导入相应的对象。
+### 大胆实践 - 亲手试一试下面的 JavaScript 代码
 
-Have a go hero – trying more JavaScript code here
-亲手试一试下面的 JavaScript 代码
-
-While we are at it, let's try entering some JavaScript code, such as additions, subtractions,
-and variable assignment, in the shell. For example:
-当我们进行交互模式，试试下面的代码，如加法，减法和变量赋值。如
+在交互模式下，试试下面的代码，如加法，减法和变量赋值。如：
+````
 var a=1
 var b=2
 b+a
 a-b
-
-The list goes on. This is just to grasp the basic idea of the shell. If you have experience with
-using JavaScript but your skills are a bit rusty, you can use this as a warmup. We can also
-think of using this as a calculator, a smart one.
+````
 你可以继续练习其它的，这只是为了了解一些基本的概念。
-如果你有使用 JavaScript 的经验但有些生疏，你可以用这个来热下身。
-我们也可以用这个作为一个计算器
-如果我们输入一个不完整的行后回车，如
-Say we give an unfinished line, for example:
+如果你有使用 JavaScript 的经验但有些生疏，你不防用这些来热下身。
+我们也可以用它作为一个计算器。
+
+如果我们输入一个不完整的行后回车，如：
+````
 var c=
-We will see the prompt change into this:
-我们将会看到如下的提示：(Gjs 和 Seed 的一点的区别)
+````
+我们将会看到如下的提示：(Gjs 和 Seed 的一个‘点’的区别)
+````
 ..
-This means that we need to finish it or else Seed will spew a syntax error message.
-If done with this, feel free to quit by pressing the Ctrl + C key combination, and it will bring us
-back to the system's terminal console.
-这意味你需要完整的输入，否则 Gjs / Seed 将输出一个语法错误。
+````
+这意味你需要完整的输入，否则 Gjs 或 Seed 将输出一个语法错误。
 
-完成尝试之后，你可以使用 Ctrl + C 来退出，返回到终端。
+实验结束之后，你可以使用 **Ctrl + C** 来退出，返回到终端。
 
-Time for action – running our program with Seed
-运行程序
+### 实践环节 - 用 Gjs 或 Seed 来运行程序
 
-Interactive mode is not the approach that we would use in our real applications. What we
-are going to do now is to put our code in a file and then run it. Are you ready?
 交互模式在实际的应用程序是无法使用的。我们现在要做的就是把代码放到一个文件中并运行它。
 准备好了么？
-1.	Fire up Anjuta.
-启动 Anjuta
-2.	Create a new file by via File | New.
-创建一个新的文件 文件|新建 (File | New)
-3.	
-Fill the editor with this piece of code:
-输入下面的代码
-#!/usr/bin/env seed
-print("Hello, world")
-4.	
-Save this file as hello-world.js . It is better to create a new directory for this (say,
-hello-worldjs ) and put this file inside it.
-保存文件为 hello-world.js 。最好创建一个新的目录（如hello-world )并把文件保存到这个目录下。
 
-You can click on the Create folder button, type
-hello-worldjs, and click on the newly created folder.
-在保存时弹出的对话框上，你可以点击创建文件夹的按钮来创建新的目录。
+1. 启动 _Anjuta_ 。
+2. 菜单 **文件|新建 (File | New)** 创建一个新的文件 。
+3. 输入下面的代码
 
-5. Click on the Run menu and choose Execute. A small dialog will appear; fill the
-Program field with /usr/bin/seed and the Arguments field with hello-world.
-js . Make sure that the Run in terminal option is checked.
-在菜单上单击运行菜单，再选择执行，弹出一个小的对话框，在 Program 栏填入 /usr/bin/seed
-在参数f(Arguments)栏填入 hello-world.js 。 一定要选择在终端运行(Run in terminal)的复选框。
-What just happened?
-发生了什么？
-We call this method of program invocation as scripting. With this approach, the file itself is
-loaded and run by Seed directly. It uses a similar method with other scripts such as Bash,
-Perl, and Python. We can see from the first line that we use the hash bang ( #! ) sign to
-indicate the program that is used as the interpreter of the script. We used /usr/bin/
-env followed by seed instead of directly putting /usr/bin/seed there.
-我们称做这为脚本。通过这种方法，文件自己加载并直接用 Gjs / Seed 运行。这种方法类似于其它的脚本，
-如 Bash, Perl 和 Python 。从第一行你可以看到我们使用了Hashbang (#!) 来指明脚本所用的程序。
-我们使用 /usr/bin/env seed ，而不是直接使用 /usb/bin/seed 。
- We do it this way because we don't want to strictly tighten the location of seed. With env , the system will
-honor the system path setting to find the exact location of Seed. 
-因为我们不想严格的限制 seed 的位置。使用 env 系统将通过系统的路径来找到 Seed 的位置。
+````JavaScript
+    #!/usr/bin/env gjs
+    print("Hello, world")
+````
+        或
+````
+    #!/usr/bin/env seed
+    print("Hello, world")
+````
+4. 保存文件为 _hello-world.js_ 。最好创建一个新的目录（如 _hello-worldjs_) 并把文件保存到这个目录下。
 
-For example, if we have
-seed in /usr/local/bin instead of in /usr/bin , the program will still work.
-You might wonder why we still need to put /usr/bin/seed in the Run dialog rather than
-entering hello-world.js directly. This is because we have not yet set the executable
-property of the script. Let's bring out our Linux administration skill and go to the directory
-where we placed hello-world.js and invoke this command in the terminal:
-chmod +x hello-world.js
+    > ✔ 在保存时弹出的对话框上，你可以点击 **创建文件夹 (Create Folder)** 按钮来创建新的目录。
 
-如果我们的 seed 在 /usr/local/bin 目录下，而不是在 /usr/bin 下，程序仍会正常工作。
-你也许会有疑问为什么我们在运行的对话框上填入了 /usr/bin/seed 而不是输入 hello-world.js 。
+5. 在菜单上单击 **运行 (Run)** 菜单，再选择 **执行(Execute)** ，弹出一个小的对话框，在 **程序 (Program)** 栏填入 _/usr/bin/gjs_ 或 _/usr/bin/seed_ ，在 **参数 (Arguments)** 栏填入 _hello-world.js_ 。 注意一定要选择 **终端运行 (Run in terminal)** 的复选框。如果保存到一个新的目录，也要设置 **工作目录 (Working Directory)** 为新的目录。
+
+### 刚刚发生了什么？
+
+我们称做这为脚本。通过这种方法，文件自己加载并直接用 Gjs 或 Seed 运行。这种方法类似于其它的脚本，
+如 Bash, Perl 和 Python 。从第一行你可以看到我们使用了 Hashbang (#!) 来指明脚本所用的程序。
+我们使用 _/usr/bin/env gjs_ 或 _/usr/bin/env seed_ ，而不是直接使用 _/usb/bin/gjs_ 或 _/usb/bin/seed_ 。
+因为我们不想严格的限制 _gjs_ 或 _seed_ 的位置。使用 _env_ 系统将通过系统的路径来找到 Gjs 或 Seed 的位置。
+如果我们的 _gjs_ 或 _seed_ 在 _/usr/local/bin_ 目录下，而不是在 _/usr/bin_ 下，程序仍会正常工作。
+
+你也许会有疑问为什么我们在运行的对话框上填入了 _/usr/bin/seed_ 而不是输入 _hello-world.js_ 。
 这是因为你没有为该文件设置可执行属性。通过下面的指令你可以设置可执行权限。
+````
 chmod +x hello-world.js
-
-
-After this, we can put hello-world.js immediately in the Program field of the Run dialog.
-You may notice that we can no longer see this dialog when accessing the Run menu and
-Execute menu. This is because Anjuta now thinks that we already set the program arguments
-and are ready to execute. If we want to change this again, we can go to the Run menu and
-choose the Program Parameters... menu. Alternatively, we can run the script directly from
-the system console like this:
-./hello-world.js
-这之后，我们就可以直接在运行对话框上的程序栏中输入 hello-world.js 。
-你也许注意到在执行的时候，不再提示对话框了。这是因为 Anjuta 认为我们已经设置程序的运行参数。
-如果想要更改，从运行菜单选择程序参数(Program Parameters)。
+````
+这之后，我们就可以直接在 **运行(Run)** 对话框上的 **程序(Program)** 栏中输入 _hello-world.js_ 。
+你也许注意到在 **执行(Execute)** 的时候，不再提示对话框了。这是因为 Anjuta 认为我们已经设置程序的运行参数。
+如果想要更改，从 **运行(Run)** 菜单选择 **程序参数(Program Parameters...)** 。
 另外，我们也在可以在终端中直接运行程序：
+````
 ./hello-world.js
+````
 
-Loosely typed language
-松散类型的语言
-JavaScript is known as a loosely (weakly) typed programming language. It means that we can
-use a variable without declaring its type whether it is a number, string, or array. We simply
-use the var directive (or not) to declare a variable. We will soon find out how this works.
+### 松散类型的语言
 JavaScript 是松散类型的语言，这意味着我们不用定义变量的类型为数字，字符串或数组就可以使用它。
-只要简单的使用 var 指令去定义变量。我们将很快发现这是怎么工作的。
+只要简单的使用 _var_ 指令去定义变量。我们将很快发现这是怎么工作的。
 
-Time for action – playing with data types
-数据类型
-Now, let's discuss the basic data types in JavaScript and see how we can interact with them.
-After this, we should be able to choose which type we should use depending on our needs.
+### 实践环节 - 玩玩数据类型
 现在让我们看下 JavaScript 的基本数据类型及如何使用。
-这之后，我们就能够根据我们的需求来选择使用的类型
-1.	Create a new file called hello-world-data-types.js and fill it with this:
-创建一个新文件 hello-world-data-types.js 并填入如下代码：
-#!/usr/bin/env seed
+这之后，我们才能够根据我们的需求来选择使用的类型。
+
+1. 创建一个新文件 hello-world-data-types.js 并填入如下代码：
+````
+#!/usr/bin/env gjs
 print("Hello world")
 var number = 1;
 print(number);
@@ -228,31 +150,27 @@ number = number + 0.5;
 print(number);
 print(number.length);
 number = number + " is a number? no, it is now a string";
-print(number.length);
 print(number);
+print(number.length);
 number = (number.length == 0)
 print(number);
 number = undefined
 print(number);
-2.	
-Run it.
-运行
-
-
-3.	
-The number variable is printed, thus:
-输出的结果如下：
+````
+2. 运行
+3. 输出的结果如下：
+````
 Hello world
 1
 1.5
-[undefined]
+undefined
 1.5 is a number? no, it is now a string
 39
-0
-[undefined]
+false
+undefined
+````
+### 刚刚发生了什么？
 
-What just happened?
-怎么回事呢？
 We can now see two interesting things. First, that JavaScript can juggle between data
 types. We can change the type of one variable into another by just assigning a new value.
 The second, which we have talked about is that we do not need to declare the type of the
@@ -333,7 +251,7 @@ In JavaScript it is quite easy.
 在 JavaScript 这十分容易。
 
 Time for action – controlling Iteration
-代码时间
+### 实践环节 - 代码时间
 We can follow these steps to control iteration:
 按下面的步骤来：
 1.	Create a new file called hello-world-iteration.js and put this code in it:
@@ -350,8 +268,8 @@ print("Iteration number #" + i);
 ee that the text is printed 10 times.
 我们可以看到输出了10次结果。
 
-What just happened?
-怎么回事？
+### 刚刚发生了什么？
+
 In the code, we tell JavaScript to do 10 iterations using the for loop. We can see that
 JavaScript starts the index from 0 , and not from 1, as we initially set the value of i ( i = 0
 in the code). In each iteration we add 1 to i (see the i++ expression in the for loop, which
@@ -370,7 +288,7 @@ We have done the counting up. Now how about counting down?
 我们已经完成了累加，那么如何反过来？
 
 Time for action – manipulating an array
-操作数组
+### 实践环节 - 操作数组
 
 We can imagine an array as a collection of boxes that can hold a number of items with the
 same type. Let's try to fill those boxes.
@@ -395,8 +313,8 @@ We will see the text specifying the box number and its content.
 我们将看到下面的结果.
 [IMG]
 
-What just happened?
-发生了什么？
+### 刚刚发生了什么？
+
 The first thing we do is to declare boxes as an array:
 首先我们定义 boxes 为数据类型
 var boxes = []
@@ -447,7 +365,7 @@ OOP concept within the limitations that JavaScript has.
 我们所需要做的就是在已有的限制内使用 OOP。
 
 Time for action – using the JavaScript object
-使用  JavaScript 对象
+### 实践环节 - 使用  JavaScript 对象
 
 Now it is time to eat the meat, the JavaScript object. We will use objects extensively in this
 book. Let's do that by first introducing to ourselves a simple one.
@@ -477,8 +395,8 @@ Hello world
 xxxx-1234-1234
 A somewhat interesting book
 
-What just happened?
-发生了什么？
+### 刚刚发生了什么？
+
 Like any other data type, we can assign a variable with an object easily.
 与其它数据类型一样，我们可以给一个变量赋一个对象值。
 
@@ -552,7 +470,7 @@ object. This marks our adventure with object-oriented programming with JavaScrip
 在使用了最简单的 JavaScript 对象后，我们将再试一下复杂点的对象。
 
 Time for action – playing with constructors
-玩下构建
+### 实践环节 - 玩下构建
 When we talk about constructing an object, it means that we call a special function called a
 constructor. Let's see how to do it.
 当我们提到构建一个对象，就是指调用一个特殊的函数 constructor 。下面让我们来看一下。
@@ -576,8 +494,8 @@ Hello world
 1234
 A good title
 
-What just happened?
-发生了什么？
+### 刚刚发生了什么？
+
 This is actually similar to our previous code, with the difference that now we define it as a
 class, and then later instantiate it as an object.
 这与我们前面介绍的代码相类似，不同的是现在我们定义了一个类，然后实例化为一个对象。
@@ -643,7 +561,7 @@ In JavaScript we use prototypes to achieve this feature.
 在 JavaScript 中我们使用 prototypes 来实现这个特性。
 
 Time for action – adding prototypes
-添加 prototypes
+### 实践环节 - 添加 prototypes
 Let's now add some methods to our class. Here we will use the prototype object to
 define them.
 在 Book 类中添加一些方法。我们使用 prototype 对象来定义它们。
@@ -675,8 +593,8 @@ Hello world
 Title is A good title
 ISBN is 1234
 
-What just happened?
-发生了什么？
+### 刚刚发生了什么？
+
 In a JavaScript object, prototype is a special object that holds all the properties and
 methods inside a class or an object. So what we do here is to fill in the prototype with
 our own methods.
@@ -735,7 +653,7 @@ Don't forget about the colon and the comma!
 不要忘记冒号和逗号！
 
 Time for action – modifying the prototype of an object
-编辑一个对象的 prototype
+### 实践环节 - 编辑一个对象的 prototype
 
 As mentioned previously, we can also put something inside the prototype of an object
 directly and not in the class. This is not something that we will do on an everyday basis, but
@@ -788,8 +706,8 @@ ISBN is 4567
 TypeError 'undefined' is not a function (evaluating 'anotherBook.
 printAuthor()')
 
-What just happened?
-发生了什么
+### 刚刚发生了什么？
+
 To modify the prototype at runtime, we need to know a little secret. It's no longer accessible
 with the prototype property but rather with __proto__ . In this line, we instantiate the
 book object:
@@ -849,7 +767,7 @@ before our code gets bigger.
 想象一下我们在一个单独的脚本中实现一个特别大的项目，这对调试来说是一个恶梦。因此在我们代码变得越来越大之前有必要介绍一下。
 
 Time for action – modularizing our program
-把程序模块化
+### 实践环节 - 把程序模块化
 Now we are going to modularize our software.
 现在我们将把程序模块化
 1.	Let's create a new file called hello-world-module.js and fill it with this:
@@ -879,8 +797,8 @@ Book.prototype = {
 4.	See the printouts.
 4. 看看运行的结果。
 
-What just happened?
-发生了什么？
+### 刚刚发生了什么？
+
 From the output, we can see that it is exactly the same as the previous code. But here we
 split the code into two files.
 从输出我们可以看到各前面代码运行的结果一样，但是我们分成了两个脚本文件。
@@ -944,7 +862,7 @@ the essentials of Vala.
 也不选择 'Use GtkBuilder for user interface' 选项，因为我们先做一个简单的基于文本的应用程序来了解一下 Vala 的内在。
 
 Time for action – entry point to our program
-程序的入口点
+### 实践环节 - 程序的入口点
 We are now going to replace all the generated code with our own so that we understand
 what makes an application from the ground up.
 我们将用我们自己的代码来代替所有自动生成的代码，这样我们就可以了解一个程序是如何从头开始产生的。
@@ -968,8 +886,8 @@ public class Main : Object
 3. 看下输出的结果：
 Hello, world
 
-What just happened?
-发生了什么？
+### 刚刚发生了什么？
+
 Here we start by looking at the Book class.
 下面让我们看一下 Book 类。 (TBD)
 using GLib;
@@ -1020,7 +938,7 @@ a way to make a clean set of application programming interfaces (API), which is 
 Vala 定义了一系列的成员访问符，我们可以使用它来定义哪些类的成员可以被另一个类或继承类访问。
 这些惯用语法提供给我们一系列的应用程序开发接口(API)，用起来也非常容易。
 Time for action – defining member access
-定义成员的访问
+### 实践环节 - 定义成员的访问
 Let's take a look at how to specify the access to our class member.
 让我们看一下如何指定访问类中的成员。
 1.	Create a new file and save it as book.vala inside the src/ directory. Fill it with this:
@@ -1071,7 +989,8 @@ public class Main : Object
 6. 注意程序还不能够被编译。
 [IMAGE]
 
-What just happened?
+### 刚刚发生了什么？
+
 From the error message, we see that it rejects our access to call Book.printISBN
 (we read this dot notation as the printISBN member from the Book class).
 从错误信息看，调用 Book.printISBN 时被拒绝了（我们使用点来访问 Book 类中的 printISBN 成员）。
@@ -1130,7 +1049,7 @@ a look at how to interact with strings, numbers, and Boolean.
 让我们继续学习在 Vala 中可用的基本数据类型，也就是说看看如何使用字符串，数字和布尔值。
 
 Time for action – experiment with data types
-数据类型实验
+### 实践环节 - 数据类型实验
 We will now create an imaginary BookStore program to explore the data types in Vala.
 我们现在通过创建一个想象中的书店 (BookStore) 程序来了解 Vala 的数据类型。
 1.	Create a new file called bookstore.vala and put it in src/ . Fill it with these lines:
@@ -1207,7 +1126,7 @@ Stock is 6
 and price is now $ 5.000000
 And the book is still available
 
-What just happened?
+### 刚刚发生了什么？
 
 Let's start analyzing from the calling code, the Main constructor.
 让我们从 Main 构造函数开始分析。
@@ -1276,7 +1195,7 @@ Gee 是 Vala 中一个集合的库。集合的基本类型有 list, set 和 maps
 这些与数组类似，但功能更强大些。
 
 Time for action – adding the Gee library
-添加 Gee 库
+### 实践环节 - 添加 Gee 库
 Let's take a look at Gee more closely. But first, let's try adding it to our project:
 让我们看下 Gee ，但首先需要把它加入到项目中：
 1.	Click on the Project menu and choose Add Library....
@@ -1312,7 +1231,7 @@ up changes that we made in Makefile.am and configure.ac .
 8.	 Try running our previous code again. There should be no error anymore.
 8. 运行之前的代码，现在不应该再有错误了。
 
-What just happened?
+### 刚刚发生了什么？
 
 We just added Gee into the project. Anjuta support for Vala is not yet perfect as we need to
 perform two actions (as we just did) to add a library into a project, one for C compilation and
@@ -1321,6 +1240,7 @@ either Vala would not recognize the Gee namespace or the C compiler would not fi
 Gee header files and library.
 
 Time for action – Gee in action
+### 实践环节 - 
 After installing Gee in our project, let's quickly check what capabilities Gee has to offer. Let's
 start from the simple ones, the array list.
 1.	Modify our book.vala file to look like this:
@@ -1372,7 +1292,7 @@ Stock is 6
 and price is now $ 5.000000
 And the book is still available
 
-What just happened?
+### 刚刚发生了什么？
 
 Here we try to utilize the array list, which is one of many collection data structures provided
 by Gee.
@@ -1435,6 +1355,7 @@ When your code grows and you have more than one constructor, this alternative is
 than initializing in the constructor because you must copy all of the initialization code to
 all constructors.
 Time for action – watching for signals
+### 实践环节 - 
 Vala has a construct for emitting and watching signals, which is a mechanism of subscribing
 to information when something happens in the code. We can subscribe to a signal by
 connecting the function that will perform some action into the signal. Let's see how it works.
@@ -1508,7 +1429,9 @@ and price is now $ 5.000000
 Uh oh, we are going to run out stock soon!
 And the book is still available
 Uh oh, price is too low
-What just happened?
+
+### 刚刚发生了什么？
+
 The warning message printed that the stock is running out and the price is too low is not
 printed by BookStore class but rather by the Main class. This assumes a scenario where
 the Main class subscribes to the signals and will do something about it when Main receives
